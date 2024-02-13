@@ -7,12 +7,16 @@ public class number : MonoBehaviour
 {
     public TextMeshPro text;
     public int numberAssigned;
+    public int orderAssigned;
     float targetAlpha = 0;
     float alpha = 0;
     public float smooth = 4f;
     public bool disabled;
     public Animator anim;
     public bool destroy;
+
+    public AudioSource audioSource1;
+    public AudioSource audioSource2;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,17 @@ public class number : MonoBehaviour
     {
         Destroy(gameObject);
         FindAnyObjectByType<numberSpawner>().numberDestroyed();
+    }
+    public void playFoldSFX()
+    {
+        audioSource1.Play();
+    }
+    public void playNoteSFX()
+    {
+        int note = orderAssigned + 1;
+        int[] noteSteps = { 0, 2, 4, 5, 7, 9, 11, 12};
+        audioSource2.pitch = Mathf.Pow(1.05946f, noteSteps[note]);
+        audioSource2.Play();
     }
 
 }

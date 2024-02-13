@@ -19,6 +19,7 @@ public class continueButton : MonoBehaviour
     {
         FindAnyObjectByType<numberSpawner>().continueBut();
         anim.SetTrigger("disappear");
+        GetComponent<AudioSource>().Play();
     }
     private void OnMouseEnter()
     {

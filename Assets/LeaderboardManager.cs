@@ -30,4 +30,8 @@ public class LeaderboardManager : MonoBehaviour
             scores[i].text = result.Leaderboard[i].StatValue.ToString();
         }
     }
+    public void refreshData(string title)
+    {
+        PlayfabManager.manager.GetLeaderboard(title);
+    }
 }

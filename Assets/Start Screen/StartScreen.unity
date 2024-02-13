@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 250982032}
   - component: {fileID: 250982031}
   - component: {fileID: 250982029}
+  - component: {fileID: 250982033}
   m_Layer: 5
   m_Name: Pass
   m_TagString: Untagged
@@ -432,6 +433,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250982028}
   m_CullTransparentMesh: 1
+--- !u!114 &250982033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250982028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56393f797a0f7e94e95547f5052052a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &268155055
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086268eb16db941a7952b7336032aaa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerStart: 0
 --- !u!4 &634987091
 Transform:
   m_ObjectHideFlags: 0
@@ -1663,6 +1677,7 @@ GameObject:
   - component: {fileID: 1873499968}
   - component: {fileID: 1873499967}
   - component: {fileID: 1873499969}
+  - component: {fileID: 1873499970}
   m_Layer: 5
   m_Name: Email
   m_TagString: Untagged
@@ -1826,6 +1841,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &1873499970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873499965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56393f797a0f7e94e95547f5052052a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2029341106
 GameObject:
   m_ObjectHideFlags: 0

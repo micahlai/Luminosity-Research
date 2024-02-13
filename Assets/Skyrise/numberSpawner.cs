@@ -57,6 +57,7 @@ public class numberSpawner : MonoBehaviour
             number n = Instantiate(prefab).GetComponent<number>();
             numberObjects.Add(n);
             n.numberAssigned = currentIntegers[i];
+            n.orderAssigned = i;
 
             float posX = Random.Range(bounds[0].x, bounds[1].x);
             float posY = Random.Range(bounds[0].y, bounds[1].y);
@@ -144,13 +145,15 @@ public class numberSpawner : MonoBehaviour
         {
             if (number.numberAssigned == currentIntegers[step])
             {
+                number.playNoteSFX();
                 number.anim.SetTrigger("flip");
                 number.disabled = true;
                 step++;
                 if (step >= currentIntegers.Length)
                 {
-                    FindObjectOfType<backgroundMover>().moveUp(1.5f);
-                    FindAnyObjectByType<scoreManagerSkyRise>().updateScore(1250);
+                    float scoreIncrease = (FindAnyObjectByType<scoreManagerSkyRise>().scoreNum / 3000) + 2f;
+                    FindObjectOfType<backgroundMover>().moveUp(scoreIncrease);
+                    FindAnyObjectByType<scoreManagerSkyRise>().updateScore(Mathf.RoundToInt(400 * scoreIncrease));
                     resetGame();
                 }
             }
@@ -162,6 +165,10 @@ public class numberSpawner : MonoBehaviour
                     FindObjectOfType<scoreManagerSkyRise>().death();
                 }
                 resetGame();
+                foreach(number n in FindObjectsOfType<number>())
+                {
+                    n.disabled = true;
+                }
             }
         }
     }

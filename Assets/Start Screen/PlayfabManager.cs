@@ -13,8 +13,8 @@ public class PlayfabManager : MonoBehaviour
     public static PlayfabManager manager;
 
     public TextMeshProUGUI messageText;
-    public TMP_InputField emailInput;
-    public TMP_InputField passwordInput;
+    public InputField emailInput;
+    public InputField passwordInput;
 
     // Start is called before the first frame update
 
@@ -33,7 +33,7 @@ public class PlayfabManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        passwordInput.inputType = TMP_InputField.InputType.Password;
+        passwordInput.inputType =  InputField.InputType.Password;
     }
 
     // Update is called once per frame

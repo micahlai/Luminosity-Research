@@ -137,9 +137,7 @@ public class PlayfabManager : MonoBehaviour
     }
     void OnLeaderboardGet(GetLeaderboardResult result)
     {
-        foreach(var item in result.Leaderboard)
-        {
-            Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
-        }
+        Debug.Log("Leaderboard Data Recieved");
+        FindObjectOfType<LeaderboardManager>().recieveData(result);
     }
 }

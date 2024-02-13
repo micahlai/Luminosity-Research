@@ -39,6 +39,9 @@ public class scoreManagerSkyRise : MonoBehaviour
         lives.text = livesNum.ToString() + " lives left";
         scoreNum = 0;
         scoreNumDisplay = 0;
+
+        HUD.SetActive(false);
+        deathUI.SetActive(false);
     }
     public void death()
     {
@@ -47,5 +50,10 @@ public class scoreManagerSkyRise : MonoBehaviour
         deathScore.text = scoreNum.ToString() + " ft.";
         PlayfabManager.manager.SendLeaderboard(scoreNum, "Skyrise");
         PlayfabManager.manager.GetLeaderboard("Skyrise");
+    }
+    public void playAgain()
+    {
+        
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }

@@ -76,7 +76,6 @@ public class numberSpawner : MonoBehaviour
                             tooClose = true;
                         }
                     }
-                    Debug.Log(tooClose);
                     if (tooClose)
                     {
                         posX = Random.Range(bounds[0].x, bounds[1].x);
@@ -131,7 +130,7 @@ public class numberSpawner : MonoBehaviour
     }
     public void continueBut()
     {
-        if (!inGame)
+        if (!inGame && FindObjectOfType<scoreManagerSkyRise>().livesNum > 0)
         {
             showing = true;
             spawnNumbers(numberRange, count);
@@ -158,6 +157,10 @@ public class numberSpawner : MonoBehaviour
             else
             {
                 FindAnyObjectByType<scoreManagerSkyRise>().updateLives();
+                if(FindObjectOfType<scoreManagerSkyRise>().livesNum <= 0)
+                {
+                    FindObjectOfType<scoreManagerSkyRise>().death();
+                }
                 resetGame();
             }
         }

@@ -14,6 +14,10 @@ public class scoreManagerSkyRise : MonoBehaviour
 
     float scoreNumDisplay;
 
+    public GameObject HUD;
+    public GameObject deathUI;
+    public TextMeshProUGUI deathScore;
+
     public void updateScore(int value)
     {
         scoreNum += value;
@@ -35,5 +39,13 @@ public class scoreManagerSkyRise : MonoBehaviour
         lives.text = livesNum.ToString() + " lives left";
         scoreNum = 0;
         scoreNumDisplay = 0;
+    }
+    public void death()
+    {
+        HUD.SetActive(false);
+        deathUI.SetActive(true);
+        deathScore.text = scoreNum.ToString() + " ft.";
+        PlayfabManager.manager.SendLeaderboard(scoreNum, "Skyrise");
+        PlayfabManager.manager.GetLeaderboard("Skyrise");
     }
 }

@@ -13,8 +13,13 @@ public class PlayfabManager : MonoBehaviour
     public static PlayfabManager manager;
 
     public TextMeshProUGUI messageText;
-    public InputField emailInput;
-    public InputField passwordInput;
+    public InputField nameInput;
+
+    public GameObject loginObjects;
+    public GameObject loggedInObjects;
+    public TextMeshProUGUI loggedInText;
+
+    bool hasDisplayName;
 
     // Start is called before the first frame update
 
@@ -33,7 +38,7 @@ public class PlayfabManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        passwordInput.inputType =  InputField.InputType.Password;
+        Login();
     }
 
     // Update is called once per frame
@@ -41,24 +46,66 @@ public class PlayfabManager : MonoBehaviour
     {
 
     }
-    
-    public void LoginButton()
+    public void ContinueButton()
     {
-        var request = new LoginWithEmailAddressRequest
+
+        FindObjectOfType<activityMonitor>().timerStart = true;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+    public void Login()
+    {
+        var request = new LoginWithCustomIDRequest
         {
-            Email = emailInput.text,
-            Password = passwordInput.text,
+            CustomId = System.Guid.NewGuid().ToString(),
+            CreateAccount = true,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
+            
+            
         };
 
-        PlayFabClientAPI.LoginWithEmailAddress(request, onSuccess, onError);
+        PlayFabClientAPI.LoginWithCustomID(request, onSuccess, onError);
+    }
+    public void UpdateDisplayName()
+    {
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = nameInput.text
+        };
+    PlayFabClientAPI.UpdateUserTitleDisplayName(request, onTitleSuccess, onError);
+    }
+    void onTitleSuccess(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log(result);
+        loginObjects.SetActive(false);
+        loggedInObjects.SetActive(true);
+        loggedInText.text = "Welcome " + result.DisplayName.ToString();
     }
     void onSuccess(LoginResult loginResult)
     {
         Debug.Log("Login Success");
         messageText.text = "Login Success";
-        FindObjectOfType<activityMonitor>().timerStart = true;
-        //FindObjectOfType<startScreen>().showScenes();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        if (loginResult.InfoResultPayload.PlayerProfile != null)
+        {
+            if(loginResult.InfoResultPayload.PlayerProfile.DisplayName == null)
+            {
+
+            }
+            else
+            {
+                loggedInText.text = "Welcome " + loginResult.InfoResultPayload.PlayerProfile.DisplayName.ToString();
+            
+
+            loginObjects.SetActive(false);
+                loggedInObjects.SetActive(true);
+            }
+        }
+        else
+        {
+            hasDisplayName = false;
+        }
     }
     void onError(PlayFabError error)
     {
